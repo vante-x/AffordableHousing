@@ -34,7 +34,7 @@ export class EsriMapComponent implements OnInit, OnDestroy {
    */
   private _zoom = 10;
   private _center: Array<number> = [0.1278, 51.5074];
-  private _basemap = "streets";
+  private _basemap = "streets-navigation-vector"; //list of basemaps @ https://developers.arcgis.com/javascript/3/jsapi/esri.basemaps-amd.html#topo
   private _loaded = false;
   private _view!: esri.MapView;
 

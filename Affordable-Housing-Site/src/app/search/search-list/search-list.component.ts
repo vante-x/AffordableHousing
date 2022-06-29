@@ -25,7 +25,7 @@ export class SearchListComponent implements OnInit {
 
     // Set our map properties
     mapCenter = [ -81.379234, 28.538336];
-    basemapType = 'satellite';
+    basemapType = 'streets-navigation-vector';
     mapZoomLevel = 12;
 
     //variable for search by 'address' or 'neighborhood'
