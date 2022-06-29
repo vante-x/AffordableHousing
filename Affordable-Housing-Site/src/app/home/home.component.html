@@ -1,0 +1,191 @@
+<div class="ll-hero">
+
+  <div id="video-container">
+    <img id="BannerImg" src="assets/images/HomeBanner.png" alt="Italian Trulli">
+    <div class="container">
+      <div class="grid grid-cols-12 gap-x-6">
+
+        <div class="col-span-7 md:col-span-6 lg:col-span-6 xxl:col-span-7 ll-hero-text">
+        </div>
+
+        <div class=" pb-30 lg:col-start-7 col-end-11 md:col-start-0 col-end-12 sm:col-span-12 xxl:col-span-7">
+          <div class="pb-20 pt-40 mr-3" style="object-fit:scale-down;">
+            <h1 class="rounded-md bg-white bg-opacity-10 lg:mt-12 px-5 py-5" style=" font-size: 25px;
+            line-height: 50px;
+            font-weight:400;
+            text-align: center; 
+            color: white;">
+              Compare and rank apartments based on rent and energy costs.
+            </h1>
+          </div>
+
+          <!-- if the address radio button is selected, autocomplete is pulled from 
+          the addresses in the database -->
+          <div *ngIf="searchPreference=='1'">
+            <div class="flex flex-col justify-center items-center" style="object-fit:scale-down;">
+              <form class="example-form">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Search by address</mat-label>
+                  <input type="text"
+                        placeholder="Select an address"
+                        aria-label=""
+                        matInput
+                        [formControl]="myControl"
+                        [matAutocomplete]="auto">
+                  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let product of products" [value]="product.address">
+                      {{product.address}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </form>
+            </div>
+          </div>
+
+          <!-- if the neighborhood radio button is selected, autocomplete is pulled from 
+          the options list in the home.component.ts file -->
+          <div *ngIf="searchPreference=='2'">
+            <div class="flex flex-col justify-center items-center" style="object-fit:scale-down;">
+              <form class="example-form">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Search by neighborhood</mat-label>
+                  <input type="text"
+                        placeholder="Select a neighborhood"
+                        aria-label=""
+                        matInput
+                        [formControl]="myControl"
+                        [matAutocomplete]="auto">
+                  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </form>
+            </div>
+          </div>
+          
+
+          <div class="flex flex-wrap justify-center items-center mt-2" style="text-align: right;">
+
+            <div class="rounded-md bg-white bg-opacity-10 px-5 py-5inline-block mr-5" style="color: white;">
+              <mat-radio-group class="searchbar-radio-group" (change)="changeComboo($event)" [(ngModel)]="searchPreference">
+                <mat-radio-button class="px-1 py-2 mx-3" value="1" color="primary" [checked]="true">
+                  Address
+                </mat-radio-button>
+                
+                <mat-radio-button class="px-1 py-2 mx-3" value="2" color="warn">
+                  Neighborhood
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div></div>
+
+
+<!-- PRODUCTS TABLE -->
+<div>
+  <div class="container">
+    <div class="ll-section-head text-center mb-5"><br><br>
+      <h3 class="ll-service__title text-center font-extralight mb-12">Featured Housing</h3>
+      <h4 class="ll-section-head__subheading">Top most affordable housing today.</h4>
+    </div>
+    <div> 
+      <mat-table #table [dataSource]="products" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let product of products"> 
+            <a [routerLink]="['/products', product.id]" style="color: #004B8D;">{{product.name}} </a></mat-cell>
+        </ng-container>
+
+        <!-- Address Column -->
+        <ng-container matColumnDef="address">
+          <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+          <mat-cell *matCellDef="let product of products"> {{product.address}} </mat-cell>
+        </ng-container>
+
+        <!-- Rent Column -->
+        <ng-container matColumnDef="rent">
+          <mat-header-cell *matHeaderCellDef> Rent </mat-header-cell>
+          <mat-cell *matCellDef="let product of products"> {{product.price}} </mat-cell>
+        </ng-container>
+
+        <!-- Rating Column -->
+        <ng-container matColumnDef="rating">
+          <mat-header-cell *matHeaderCellDef> Rating </mat-header-cell>
+          <mat-cell *matCellDef="let product of products"> {{ product.rating }} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>
+
+<div class="ll-service-area ">
+  <div class="container ">
+    <h1 class="ll-service__title text-center font-extralight mb-12 ">Quick Stats</h1>
+    <div class="ll-services grid grid-cols-12 gap-8">
+      <div class="ll-service col-span-12 sm:col-span-6 lg:col-span-3">
+        <div class="number">2.2K</div>
+        <h3 class="mb-2">Rent</h3>
+        <p>The current average rent in Orlando FL. This cost is calculated using store prices in our local database.</p>
+      </div>
+      <div class="ll-service col-span-12 sm:col-span-6 lg:col-span-3">
+        <div class="number">$120</div>
+        <h3 class="mb-2">Utility</h3>
+        <p>The average utility costs in Orlando, FL.</p>
+      </div>
+      <div class="ll-service col-span-12 sm:col-span-6 lg:col-span-3">
+        <div class="number">$98</div>
+        <h3 class="mb-2">Energy Rating</h3>
+        <p>The average energy and water efficiency rating of apartments in our database.</p>
+      </div>
+      <div class="ll-service col-span-12 sm:col-span-6 lg:col-span-3">
+        <div class="number">1107</div>
+        <h3 class="mb-2">Listings</h3>
+        <p>Amount of available housing opening in Orlando, FL.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ll-process-area mt-16" style="background-color: black;">
+  <div class="container">
+    <h2 class="ll-process__title text-center mb-8">How-To find affordable housing</h2>
+    <div class="ll-processes grid grid-cols-12 gap-8">
+      <div class="ll-process col-span-12 sm:col-span-6 lg:col-span-3">
+        <div class="number">01</div>
+        <h3 class="mb-2 font-bold" style="color: #FBB92F;">Search</h3>
+        <p class="text-white" style="color: #fff;">Search for affordable housing in Orlando, FL.</p>
+      </div>
+      <div class="ll-process col-span-12 sm:col-span-6 lg:col-span-3">
+        <div class="number">02</div>
+        <h3 class="mb-2 font-bold" style="color: #FBB92F;">Choose</h3>
+        <p class="text-white" style="color: #fff;">Select from a wide range of available housing based on your needs.</p>
+      </div>
+      <div class="ll-process col-span-12 sm:col-span-6 lg:col-span-3">
+        <div class="number">03</div>
+        <h3 class="mb-2 font-bold" style="color: #FBB92F;">Calculate</h3>
+        <p class="text-white" style="color: #fff;">Estimate your monthly rent and utility costs with easy to use tools.</p>
+      </div>
+      <div class="ll-process col-span-12 sm:col-span-6 lg:col-span-3">
+        <div class="number">04</div>
+        <h3 class="mb-2 font-bold" style="color: #FBB92F;">Purchase</h3>
+        <p class="text-white" style="color: #fff;">Contact the landlord and rent/ purchase your selection.</p>
+      </div>
+    </div>
+  </div>
+</div>
