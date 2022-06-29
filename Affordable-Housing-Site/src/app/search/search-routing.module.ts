@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SearchDetailsComponent } from './search-details/search-details.component';
 import { SearchListComponent } from './search-list/search-list.component';
+import { EsriMapComponent } from "./search-list/esri-map/esri-map.component";
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: ':id',
     component: SearchDetailsComponent
+  },
+  {
+    path: '',
+    component: EsriMapComponent
   },
 ];
 

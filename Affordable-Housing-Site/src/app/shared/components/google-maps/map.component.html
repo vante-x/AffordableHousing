@@ -6,14 +6,19 @@
  [center]="center"
  [options]="options"
 >
-  <map-marker
-    *ngFor="let marker of markers"
-    [position]="marker.position"
-    [label]="marker.label"
-    [title]="marker.title"
-    [options]="marker.options"
-  >
-  </map-marker>
+
+ <map-marker
+   #marker
+   *ngFor="let marker of markers"
+   [position]="marker.position"
+   [label]="marker.label"
+   [title]="marker.title"
+   [icon]="marker.icon"
+   [options]="marker.options"   
+ >
+ </map-marker>
+ 
+ <map-info-window>{{ infoContent }} </map-info-window>
 </google-map>
 
 

@@ -21,6 +21,13 @@ export const routes: Routes = [
 
 export class SearchListComponent implements OnInit {
 
+  // ARCGIS MAP
+
+    // Set our map properties
+    mapCenter = [ -81.379234, 28.538336];
+    basemapType = 'satellite';
+    mapZoomLevel = 12;
+
     //variable for search by 'address' or 'neighborhood'
     searchPreference: String = '';
 

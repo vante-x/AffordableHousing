@@ -15,9 +15,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { EsriMapComponent } from './search-list/esri-map/esri-map.component';
 
 @NgModule({
-  declarations: [SearchListComponent, SearchDetailsComponent, SearchHeroComponent],
+  declarations: [SearchListComponent, SearchDetailsComponent, SearchHeroComponent, EsriMapComponent],
   imports: [
     CommonModule,
     SearchRoutingModule,
@@ -34,6 +35,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MatFormFieldModule,
     MatInputModule,
     MatTableModule
-  ]
+  ],
+  exports: [EsriMapComponent]
 })
 export class SearchModule { }

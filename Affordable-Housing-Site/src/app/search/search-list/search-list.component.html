@@ -81,7 +81,13 @@
                       </div>
                     </div>
                     <div class="col-start-2 col-span-1">
-                      <img name="map"  src="/assets/images/google-maps/energy map.jpg" style="height: 400px;">
+                      <app-esri-map
+                        [center]="mapCenter"
+                        [basemap]="basemapType"
+                        [zoom]="mapZoomLevel"
+                      >
+                      </app-esri-map>
+                      <!-- <img name="map"  src="/assets/images/google-maps/energy map.jpg" style="height: 400px;"> -->
                     </div>
                   </div>
                   <div>
