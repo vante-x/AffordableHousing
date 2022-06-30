@@ -9,8 +9,14 @@ import {
   EventEmitter,
   OnDestroy
 } from "@angular/core";
+import { MapInfoWindow } from "@angular/google-maps";
 import { loadModules } from "esri-loader";
+import { fieldNames } from "esri/core/sql/WhereClause";
+import * as LabelClass from "esri/layers/support/LabelClass";
 import * as Map from "esri/Map";
+import * as Content from "esri/popup/content/Content";
+import * as FieldsContent from "esri/popup/content/FieldsContent";
+import * as FieldInfo from "esri/popup/FieldInfo";
 import * as PopupTemplate from "esri/PopupTemplate";
 import { productsDB } from "src/app/shared/data/products";
 import esri = __esri; // Esri TypeScript Types
@@ -93,10 +99,10 @@ export class EsriMapComponent implements OnInit, OnDestroy {
         container: this.mapViewEl.nativeElement,
         center: this._center,
         zoom: this._zoom,
-        map: map
+        map: map,
       };
       this.setGraphics(map)
-
+      
       this._view = new EsriMapView(mapViewProperties);
       await this._view.when();
       return this._view;
@@ -122,17 +128,28 @@ export class EsriMapComponent implements OnInit, OnDestroy {
     // }
   }
 
+  setTitle(title: String) {
+    return  "<font size='1.5'>" + title
+  }
   //sets the markers onto the map by looping through the products database
 
   private setGraphics(map: esri.Map) {
-    loadModules(['esri/layers/GraphicsLayer']).then(([GraphicsLayer]) => { 
-      var graphicsLayer = new GraphicsLayer();
+    loadModules([
+      'esri/layers/GraphicsLayer', 
+      'esri/PopupTemplate', 
+      'esri/geometry/Point', 
+      'esri/Graphic', 
+      'esri/geometry/support/webMercatorUtils',
+      'esri/popup/FieldInfo',
+      'esri/popup/content/Content']).then(([GraphicsLayer, PopupTemplate, Point, Graphic, webMercatorUtils, FieldInfo, Content]) => { 
+      
+        var graphicsLayer = new GraphicsLayer();
   
       map.add(graphicsLayer)
 
       var simpleMarkerSymbol = {
         type: "simple-marker", //
-        color: [0, 136, 60], // orange0/136/60
+        color: [0, 136, 60], // green works color
         size: 20,
         style: "circle",
         outline: {
@@ -143,54 +160,36 @@ export class EsriMapComponent implements OnInit, OnDestroy {
   
       for (let product of productsDB.Product){
         // Create a point
-        loadModules(['esri/geometry/Point']).then(([Point]) => { 
           var point = new Point ({
           longitude: product.lng,
           latitude: product.lat,
         });
 
-        loadModules(['esri/Graphic', 'esri/geometry/support/webMercatorUtils' ]).then(([Graphic, webMercatorUtils]) => {
           var pointGraphic = new Graphic({
           geometry: webMercatorUtils.geographicToWebMercator(point),
           symbol: simpleMarkerSymbol
         });
         
-        
 
-        loadModules(['esri/PopupTemplate']).then(([PopupTemplate]) => {
-          const template = new PopupTemplate ({
-          title: product.name,
-            content: [
-              {
-                // Pass in the fields to display
-                type: "fields",
-                fieldInfos: [
-                  {
-                    fieldName: "Address",
-                    label: "address"
-                  }, 
-                  {
-                    fieldName: "REGION",
-                    label: "Region"
-                  }
-                ]
-              }
-            ]
-          });
+          var template = new PopupTemplate ({
+          // title: this.setTitle(product.name),
+          title: "Property Information",
+          content: [{
+            type: "text",
+            text: 
+            "<table><tr><th>Name:  </th> <td> <a [routerLink]='['/products', product.id]' style='color: #004B8D;'>" + product.name + "</a></td></tr>" +
+            "<tr><th>Address:  </th><td style='padding: 10px'>" + product.address + "</td></tr></table>"
+          }]
+        })
+          ;
 
           pointGraphic.popupTemplate = template
-          pointGraphic.popupTemplate.collapseEnabled = false;
 
         graphicsLayer.add(pointGraphic);
 
 
       }
-        )}
-      
-        )}
-    )}
-  })
-  
-    }   
+    })
+    } 
   
   }
