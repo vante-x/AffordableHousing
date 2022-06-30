@@ -101,6 +101,8 @@ export class EsriMapComponent implements OnInit, OnDestroy {
         zoom: this._zoom,
         map: map,
       };
+
+      //function that adds points to the map
       this.setGraphics(map)
       
       this._view = new EsriMapView(mapViewProperties);
@@ -143,7 +145,7 @@ export class EsriMapComponent implements OnInit, OnDestroy {
       'esri/popup/FieldInfo',
       'esri/popup/content/Content']).then(([GraphicsLayer, PopupTemplate, Point, Graphic, webMercatorUtils, FieldInfo, Content]) => { 
       
-        var graphicsLayer = new GraphicsLayer();
+      var graphicsLayer = new GraphicsLayer();
   
       map.add(graphicsLayer)
 
@@ -173,12 +175,12 @@ export class EsriMapComponent implements OnInit, OnDestroy {
 
           var template = new PopupTemplate ({
           // title: this.setTitle(product.name),
-          title: "Property Information",
+          title: "Property Details",
           content: [{
             type: "text",
             text: 
-            "<table><tr><th>Name:  </th> <td> <a [routerLink]='['/products', product.id]' style='color: #004B8D;'>" + product.name + "</a></td></tr>" +
-            "<tr><th>Address:  </th><td style='padding: 10px'>" + product.address + "</td></tr></table>"
+            "<table ><tr><th style='border: 1px solid grey; padding: 10px''>Name:  </th> <td style='border: 1px solid grey; padding: 10px''> <a href='localhost:4200/contacts' style='color: #004B8D;'>" + product.name + "</a></td></tr>" +
+            "<tr><th style='border: 1px solid grey; padding: 10px''>Address:  </th><td style='border: 1px solid grey; padding: 10px'>" + product.address + "</td></tr></table>"
           }]
         })
           ;
