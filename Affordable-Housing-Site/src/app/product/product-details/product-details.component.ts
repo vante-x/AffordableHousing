@@ -3,6 +3,9 @@ import { NgForm } from '@angular/forms';
 import { FormGroup, FormControl} from '@angular/forms';
 import {productsDB} from '../../shared/data/products';
 import {ActivatedRoute} from '@angular/router';
+import * as Point from 'esri/geometry/Point';
+import * as SimpleMarkerSymbol from 'esri/symbols/SimpleMarkerSymbol';
+import * as Graphic from 'esri/Graphic';
 
 
 @Component({
@@ -13,7 +16,14 @@ import {ActivatedRoute} from '@angular/router';
 
 export class ProductDetailsComponent implements OnInit {
   
+      //variable for products table
+      products: any[] = [];
 
+  // ARCGIS MAP
+    // Set our map properties
+    mapCenter = [ -81.379234, 28.538336];
+    basemapType = 'streets-navigation-vector';
+    mapZoomLevel = 12;
 
     title = 'app';
     radioSel:any;
@@ -48,8 +58,8 @@ export class ProductDetailsComponent implements OnInit {
       { this.mapsource= "/assets/images/google-maps/map_schools.jpg" ;}
     }
   
-    //variable for products table
-    products: any[] = [];
+
+
 
     //variable for product.id passed from home.component to query database
     id: number = 1;
@@ -59,6 +69,9 @@ export class ProductDetailsComponent implements OnInit {
       
       //reference to the products db
       this.products = productsDB.Product
+
+
+
 
       //pulls product id from url routerlink query
       this.route.params.subscribe(params => {

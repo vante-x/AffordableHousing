@@ -10,6 +10,9 @@ import {
   OnDestroy
 } from "@angular/core";
 import { loadModules } from "esri-loader";
+import * as Map from "esri/Map";
+import * as PopupTemplate from "esri/PopupTemplate";
+import { productsDB } from "src/app/shared/data/products";
 import esri = __esri; // Esri TypeScript Types
 
 @Component({
@@ -20,7 +23,6 @@ import esri = __esri; // Esri TypeScript Types
 export class EsriMapComponent implements OnInit, OnDestroy {
   @Output() mapLoadedEvent = new EventEmitter<boolean>();
 
-  // The <div> where we will place the map
   // The <div> where we will place the map
 
   @ViewChild("mapViewNode", { static: true })
@@ -93,6 +95,7 @@ export class EsriMapComponent implements OnInit, OnDestroy {
         zoom: this._zoom,
         map: map
       };
+      this.setGraphics(map)
 
       this._view = new EsriMapView(mapViewProperties);
       await this._view.when();
@@ -118,4 +121,76 @@ export class EsriMapComponent implements OnInit, OnDestroy {
     //   this._view.container = null;
     // }
   }
-}
+
+  //sets the markers onto the map by looping through the products database
+
+  private setGraphics(map: esri.Map) {
+    loadModules(['esri/layers/GraphicsLayer']).then(([GraphicsLayer]) => { 
+      var graphicsLayer = new GraphicsLayer();
+  
+      map.add(graphicsLayer)
+
+      var simpleMarkerSymbol = {
+        type: "simple-marker", //
+        color: [0, 136, 60], // orange0/136/60
+        size: 20,
+        style: "circle",
+        outline: {
+          color: [255, 255, 255], // white
+          width: 2
+        }
+      };
+  
+      for (let product of productsDB.Product){
+        // Create a point
+        loadModules(['esri/geometry/Point']).then(([Point]) => { 
+          var point = new Point ({
+          longitude: product.lng,
+          latitude: product.lat,
+        });
+
+        loadModules(['esri/Graphic', 'esri/geometry/support/webMercatorUtils' ]).then(([Graphic, webMercatorUtils]) => {
+          var pointGraphic = new Graphic({
+          geometry: webMercatorUtils.geographicToWebMercator(point),
+          symbol: simpleMarkerSymbol
+        });
+        
+        
+
+        loadModules(['esri/PopupTemplate']).then(([PopupTemplate]) => {
+          const template = new PopupTemplate ({
+          title: product.name,
+            content: [
+              {
+                // Pass in the fields to display
+                type: "fields",
+                fieldInfos: [
+                  {
+                    fieldName: "Address",
+                    label: "address"
+                  }, 
+                  {
+                    fieldName: "REGION",
+                    label: "Region"
+                  }
+                ]
+              }
+            ]
+          });
+
+          pointGraphic.popupTemplate = template
+          pointGraphic.popupTemplate.collapseEnabled = false;
+
+        graphicsLayer.add(pointGraphic);
+
+
+      }
+        )}
+      
+        )}
+    )}
+  })
+  
+    }   
+  
+  }
