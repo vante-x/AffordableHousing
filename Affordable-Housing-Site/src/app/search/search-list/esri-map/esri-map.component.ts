@@ -19,6 +19,7 @@ import * as FieldsContent from "esri/popup/content/FieldsContent";
 import * as FieldInfo from "esri/popup/FieldInfo";
 import * as PopupTemplate from "esri/PopupTemplate";
 import { productsDB } from "src/app/shared/data/products";
+import { energyDB } from "src/app/shared/data/energy";
 import esri = __esri; // Esri TypeScript Types
 
 @Component({
@@ -143,39 +144,42 @@ export class EsriMapComponent implements OnInit, OnDestroy {
       'esri/Graphic', 
       'esri/geometry/support/webMercatorUtils',
       'esri/popup/FieldInfo',
+      'esri/symbols/SimpleFillSymbol',
       'esri/popup/content/Content']).then(([GraphicsLayer, PopupTemplate, Point, Graphic, webMercatorUtils, FieldInfo, Content]) => { 
       
       var graphicsLayer = new GraphicsLayer();
   
       map.add(graphicsLayer)
 
-      var simpleMarkerSymbol = {
-        type: "simple-marker", //
-        color: [0, 136, 60], // green works color
-        size: 20,
-        style: "circle",
-        outline: {
-          color: [255, 255, 255], // white
-          width: 2
-        }
-      };
+
   
-      for (let product of productsDB.Product){
+      for (let energy of energyDB.energy){
         // Create a point
           var point = new Point ({
-          longitude: product.lng,
-          latitude: product.lat,
+          longitude: energy.lng,
+          latitude: energy.lat,
         });
-
+        var SimpleFillSymbol = {
+          type: "simple-fill", //
+          color: energy.color, 
+          size: energy.cirlceSize,
+          style: "circle",
+          Text: energy.energyRating,
+          outline: {
+            color: [0, 0, 0], // black
+            width: 2
+          },
+          label: energy.energyRating
+        };
           var pointGraphic = new Graphic({
           geometry: webMercatorUtils.geographicToWebMercator(point),
-          symbol: simpleMarkerSymbol
+          symbol: SimpleFillSymbol
         });
         
-
+/*
           var template = new PopupTemplate ({
-          // title: this.setTitle(product.name),
-          title: "Property Details",
+         title: this.setTitle(product.name),
+           // title: "Property Details",
           content: [{
             type: "text",
             text: 
@@ -186,7 +190,7 @@ export class EsriMapComponent implements OnInit, OnDestroy {
           ;
 
           pointGraphic.popupTemplate = template
-
+*/
         graphicsLayer.add(pointGraphic);
 
 
