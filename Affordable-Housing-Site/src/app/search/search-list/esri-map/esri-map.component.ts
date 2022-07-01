@@ -145,7 +145,7 @@ export class EsriMapComponent implements OnInit, OnDestroy {
       'esri/geometry/support/webMercatorUtils',
       'esri/popup/FieldInfo',
       'esri/symbols/SimpleFillSymbol',
-      'esri/popup/content/Content']).then(([GraphicsLayer, PopupTemplate, Point, Graphic, webMercatorUtils, FieldInfo, Content]) => { 
+      'esri/popup/content/Content']).then(([GraphicsLayer, PopupTemplate, Point, Graphic, webMercatorUtils]) => { 
       
       var graphicsLayer = new GraphicsLayer();
   
@@ -159,8 +159,9 @@ export class EsriMapComponent implements OnInit, OnDestroy {
           longitude: energy.lng,
           latitude: energy.lat,
         });
+
         var SimpleFillSymbol = {
-          type: "simple-fill", //
+          type: "simple-marker", //
           color: energy.color, 
           size: energy.cirlceSize,
           style: "circle",
