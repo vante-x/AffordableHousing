@@ -14,7 +14,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.products = productsDB.Product;
+      this.products = productsDB;
       this.isLoaded = true
     }, 8000)
   }

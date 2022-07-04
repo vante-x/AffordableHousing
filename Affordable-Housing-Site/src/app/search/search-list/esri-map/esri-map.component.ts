@@ -1,5 +1,6 @@
 
 import {
+  Injectable,
   Component,
   OnInit,
   ViewChild,
@@ -9,29 +10,33 @@ import {
   EventEmitter,
   OnDestroy
 } from "@angular/core";
-import { MapInfoWindow } from "@angular/google-maps";
 import { loadModules } from "esri-loader";
-import { fieldNames } from "esri/core/sql/WhereClause";
-import * as LabelClass from "esri/layers/support/LabelClass";
-import * as Map from "esri/Map";
-import * as Content from "esri/popup/content/Content";
-import * as FieldsContent from "esri/popup/content/FieldsContent";
-import * as FieldInfo from "esri/popup/FieldInfo";
-import * as PopupTemplate from "esri/PopupTemplate";
 import { productsDB } from "src/app/shared/data/products";
+import { Product } from "src/app/shared/data/product";
 import { energyDB } from "src/app/shared/data/energy";
 import esri = __esri; // Esri TypeScript Types
+import {ActivatedRoute} from '@angular/router';
+import * as GraphicsLayer from 'esri/layers/GraphicsLayer';
+import * as Point from 'esri/geometry/Point';
+import * as Graphic from 'esri/Graphic';
+import * as webMercatorUtils from 'esri/geometry/support/webMercatorUtils';
+import {} from 'esri/popup/FieldInfo';
+import {} from 'esri/symbols/SimpleFillSymbol';
+import {} from 'esri/popup/content/Content';
+
 
 @Component({
   selector: "app-esri-map",
   templateUrl: "./esri-map.component.html",
   styleUrls: ["./esri-map.component.scss"]
 })
-
+ 
+@Injectable()
 export class EsriMapComponent implements OnInit, OnDestroy {
   @Output() mapLoadedEvent = new EventEmitter<boolean>();
 
-  // The <div> where we will place the map
+  
+  id: number = 0;
 
   @ViewChild("mapViewNode", { static: true })
   private mapViewEl!: ElementRef;
@@ -47,6 +52,7 @@ export class EsriMapComponent implements OnInit, OnDestroy {
   private _basemap = "streets-navigation-vector"; //list of basemaps @ https://developers.arcgis.com/javascript/3/jsapi/esri.basemaps-amd.html#topo
   private _loaded = false;
   private _view!: esri.MapView;
+  
 
   get mapLoaded(): boolean {
     return this._loaded;
@@ -79,7 +85,23 @@ export class EsriMapComponent implements OnInit, OnDestroy {
     return this._basemap;
   }
 
-  constructor() {}
+  getProducts(): Product[] {
+    return productsDB;
+  }
+  
+  //find one product from the id in the query string
+  getProduct(id: number): Product {
+    return Product[id];
+  }
+
+  constructor(private route: ActivatedRoute) { 
+    //pulls product id from url routerlink query
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+  }
+
+
 
   async initializeMap() {
     try {
@@ -135,9 +157,9 @@ export class EsriMapComponent implements OnInit, OnDestroy {
   setTitle(title: String) {
     return  "<font size='1.5'>" + title
   }
-  //sets the markers onto the map by looping through the products database
 
   private setGraphics(map: esri.Map) {
+    
     loadModules([
       'esri/layers/GraphicsLayer', 
       'esri/PopupTemplate', 
@@ -147,79 +169,96 @@ export class EsriMapComponent implements OnInit, OnDestroy {
       'esri/popup/FieldInfo',
       'esri/symbols/SimpleFillSymbol',
       'esri/popup/content/Content']).then(([GraphicsLayer, PopupTemplate, Point, Graphic, webMercatorUtils]) => { 
-      
-     // var egraphicsLayer = new GraphicsLayer();      
-      var graphicsLayer = new GraphicsLayer();
-  
-  
-      map.add(graphicsLayer)
-      //map.add(egraphicsLayer)
-  
-      for (let energy of energyDB.energy){
+    
+        var graphicsLayer = new GraphicsLayer();
+        /*
+      if ( this.id !== 0) {  
+     
+
+        var myProduct: Product = this.getProduct(this.id)
         // Create a point
-          var point = new Point ({
-          longitude: energy.lng,
-          latitude: energy.lat,
-        });
+      var point = new Point ({
+        longitude: myProduct.lng,
+        latitude: myProduct.lat
+      });
 
-        var SimpleFillSymbol = {
-          type: "simple-marker", //
-          color: energy.color, 
-          size: energy.cirlceSize,
-          style: "circle",
-          Text: energy.energyRating,
-          outline: {
-            color: [0, 0, 0,.4], // white
-            width: 1
-          }
-        };
-          var pointGraphic = new Graphic({
-          geometry: webMercatorUtils.geographicToWebMercator(point),
-          symbol: SimpleFillSymbol
-        });
-        
-        graphicsLayer.add(pointGraphic);
-      }
+      var PropertySymbol = {
+        type: "simple-marker", //
+        color: [251,52,153], 
+        size: 15,
+        style: "square",
+        text: 
+        "<table ><tr><th style='border: 1px solid grey; padding: 10px''>Name:  </th> <td style='border: 1px solid grey; padding: 10px''> <a href='localhost:4200/contacts' style='color: #004B8D;'>" + myProduct.name + "</a></td></tr>" +
+        "<tr><th style='border: 1px solid grey; padding: 10px''>Address:  </th><td style='border: 1px solid grey; padding: 10px'>" + myProduct.address + "</td></tr></table>",
+        outline: {
+          color: [0, 0, 255], // black
+          width: 1
+        }
+      };
+        var pointGraphic = new Graphic({
+        geometry: webMercatorUtils.geographicToWebMercator(point),
+        symbol: PropertySymbol
+      });
 
-      for (let product of productsDB.Product){
-        // Create a point
-          var point = new Point ({
-          longitude: product.lng,
-          latitude: product.lat
-        });
-
-        var PropertySymbol = {
-          type: "simple-marker", //
-          color: [251,52,153], 
-          size: 15,
-          style: "square",
+      var template = new PopupTemplate ({
+        title: this.setTitle(myProduct.name),
+          // title: "Property Details",
+        content: [{
+          type: "text",
           text: 
-          "<table ><tr><th style='border: 1px solid grey; padding: 10px''>Name:  </th> <td style='border: 1px solid grey; padding: 10px''> <a href='localhost:4200/contacts' style='color: #004B8D;'>" + product.name + "</a></td></tr>" +
-          "<tr><th style='border: 1px solid grey; padding: 10px''>Address:  </th><td style='border: 1px solid grey; padding: 10px'>" + product.address + "</td></tr></table>",
-          outline: {
-            color: [0, 0, 255], // black
-            width: 1
-          }
-        };
-          var pointGraphic = new Graphic({
-          geometry: webMercatorUtils.geographicToWebMercator(point),
-          symbol: PropertySymbol
-        });
+          "<table ><tr><th style='border: 1px solid grey; padding: 10px''>Name:  </th> <td style='border: 1px solid grey; padding: 10px''> <a href='localhost:4200/contacts' style='color: #004B8D;'>" + myProduct.name + "</a></td></tr>" +
+          "<tr><th style='border: 1px solid grey; padding: 10px''>Address:  </th><td style='border: 1px solid grey; padding: 10px'>" + myProduct.address + "</td></tr></table>"
+        }]
+      });
+        pointGraphic.popupTemplate = template
 
-        var template = new PopupTemplate ({
-          title: this.setTitle(product.name),
-            // title: "Property Details",
-           content: [{
-             type: "text",
-             text: 
-             "<table ><tr><th style='border: 1px solid grey; padding: 10px''>Name:  </th> <td style='border: 1px solid grey; padding: 10px''> <a href='localhost:4200/contacts' style='color: #004B8D;'>" + product.name + "</a></td></tr>" +
-             "<tr><th style='border: 1px solid grey; padding: 10px''>Address:  </th><td style='border: 1px solid grey; padding: 10px'>" + product.address + "</td></tr></table>"
-           }]
-         });
-           pointGraphic.popupTemplate = template
+      graphicsLayer.add(pointGraphic);
+    }
+    else{*/
 
-        graphicsLayer.add(pointGraphic);
-      }
+      for (let product of productsDB){
+        // Create a point
+       var point = new Point ({
+         longitude: product.lng,
+         latitude: product.lat
+       });
+
+       var PropertySymbol = {
+         type: "simple-marker", //
+         color: [251,52,153], 
+         size: 15,
+         style: "square",
+         text: 
+         "<table ><tr><th style='border: 1px solid grey; padding: 10px''>Name:  </th> <td style='border: 1px solid grey; padding: 10px''> <a href='localhost:4200/contacts' style='color: #004B8D;'>" + product.name + "</a></td></tr>" +
+         "<tr><th style='border: 1px solid grey; padding: 10px''>Address:  </th><td style='border: 1px solid grey; padding: 10px'>" + product.address + "</td></tr></table>",
+         outline: {
+           color: [0, 0, 255], // black
+           width: 1
+         }
+       };
+         var pointGraphic = new Graphic({
+         geometry: webMercatorUtils.geographicToWebMercator(point),
+         symbol: PropertySymbol
+       });
+
+       var template = new PopupTemplate ({
+         title: this.setTitle(product.name),
+           // title: "Property Details",
+         content: [{
+           type: "text",
+           text: 
+           "<table ><tr><th style='border: 1px solid grey; padding: 10px''>Name:  </th> <td style='border: 1px solid grey; padding: 10px''> <a href='localhost:4200/contacts' style='color: #004B8D;'>" + product.name + "</a></td></tr>" +
+           "<tr><th style='border: 1px solid grey; padding: 10px''>Address:  </th><td style='border: 1px solid grey; padding: 10px'>" + product.address + "</td></tr></table>"
+         }]
+       });
+         pointGraphic.popupTemplate = template
+
+       graphicsLayer.add(pointGraphic);    
+    // }
+
+
+        }
+      
     })
   }
 }

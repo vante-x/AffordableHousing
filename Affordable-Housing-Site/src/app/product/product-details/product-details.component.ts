@@ -3,9 +3,6 @@ import { NgForm } from '@angular/forms';
 import { FormGroup, FormControl} from '@angular/forms';
 import {productsDB} from '../../shared/data/products';
 import {ActivatedRoute} from '@angular/router';
-import * as Point from 'esri/geometry/Point';
-import * as SimpleMarkerSymbol from 'esri/symbols/SimpleMarkerSymbol';
-import * as Graphic from 'esri/Graphic';
 
 
 @Component({
@@ -39,7 +36,7 @@ export class ProductDetailsComponent implements OnInit {
       return this.form.controls;
     }
 
-
+/*
     changeMap(e: any) {
 
       if(e.target.value == 'map')
@@ -57,7 +54,7 @@ export class ProductDetailsComponent implements OnInit {
       if(e.target.value == 'schools')
       { this.mapsource= "/assets/images/google-maps/map_schools.jpg" ;}
     }
-  
+  */
 
 
 
@@ -68,7 +65,7 @@ export class ProductDetailsComponent implements OnInit {
       this.mapsource= "/assets/images/google-maps/map_single_location3.jpg"
       
       //reference to the products db
-      this.products = productsDB.Product
+      this.products = productsDB
 
 
 
