@@ -198,7 +198,6 @@ export class EsriMapComponent implements OnInit, OnDestroy {
           geometry: webMercatorUtils.geographicToWebMercator(point),
           symbol: SimpleFillSymbol
         });
-        
 /*
           var template = new PopupTemplate ({
          title: this.setTitle(product.name),
@@ -214,14 +213,57 @@ export class EsriMapComponent implements OnInit, OnDestroy {
 
           pointGraphic.popupTemplate = template
 */
-         var pointGraphic = new Graphic({
+         var pointGraphic2 = new Graphic({
          geometry: webMercatorUtils.geographicToWebMercator(point),
          symbol: SimpleFillSymbol
        });
 
        graphicsLayer.add(pointGraphic);    
 
+      }
+
+       for (let product of productsDB.Product){
+        // Create a point
+       var point2 = new Point ({
+         longitude: product.lng,
+         latitude: product.lat
+       });
+
+       var PropertySymbol2 = {
+         type: "simple-marker", //
+         color: [251,52,153], 
+         size: 15,
+         style: "square",
+         text: 
+         "<table ><tr><th style='border: 1px solid grey; padding: 10px''>Name:  </th> <td style='border: 1px solid grey; padding: 10px''> <a href='localhost:4200/contacts' style='color: #004B8D;'>" + product.name + "</a></td></tr>" +
+         "<tr><th style='border: 1px solid grey; padding: 10px''>Address:  </th><td style='border: 1px solid grey; padding: 10px'>" + product.address + "</td></tr></table>",
+         outline: {
+           color: [0, 0, 255], // black
+           width: 1
+         }
+       };
+         var pointGraphic2 = new Graphic({
+         geometry: webMercatorUtils.geographicToWebMercator(point2),
+         symbol: PropertySymbol2
+       });
+
+       var template = new PopupTemplate ({
+         title: this.setTitle(product.name),
+           // title: "Property Details",
+         content: [{
+           type: "text",
+           text: 
+           "<table ><tr><th style='border: 1px solid grey; padding: 10px''>Name:  </th> <td style='border: 1px solid grey; padding: 10px''> <a href='localhost:4200/contacts' style='color: #004B8D;'>" + product.name + "</a></td></tr>" +
+           "<tr><th style='border: 1px solid grey; padding: 10px''>Address:  </th><td style='border: 1px solid grey; padding: 10px'>" + product.address + "</td></tr></table>"
+         }]
+       });
+         pointGraphic2.popupTemplate = template
+
+       graphicsLayer.add(pointGraphic2);    
+
         }
+
+
       
     })
   }
