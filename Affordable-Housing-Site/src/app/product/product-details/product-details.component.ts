@@ -65,7 +65,7 @@ export class ProductDetailsComponent implements OnInit {
       this.mapsource= "/assets/images/google-maps/map_single_location3.jpg"
       
       //reference to the products db
-      this.products = productsDB
+      this.products = productsDB.Product
 
 
 

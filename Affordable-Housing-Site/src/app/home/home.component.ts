@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
 
 
   constructor() { 
-    this.products = productsDB
+    this.products = productsDB.Product
   }
   ngOnInit() {
 

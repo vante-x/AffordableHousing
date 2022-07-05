@@ -8,7 +8,7 @@ import { productsDB } from '../../shared/data/products';
 export class HomeProductsComponent implements OnInit {
   products : any[] = [];
   constructor() { 
-    this.products = productsDB
+    this.products = productsDB.Product
   }
 
   ngOnInit(): void { }

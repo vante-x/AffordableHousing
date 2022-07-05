@@ -1,6 +1,5 @@
-import { Product } from './product';
-export const  productsDB: 
-  Product[] = [
+export class   productsDB{ 
+  static Product = [
     {
       id: 1,
       images: ['assets/images/products/01-2.png', 'assets/images/products/01-2.png', 'assets/images/products/01-3.png'],
@@ -344,3 +343,4 @@ export const  productsDB:
       image3:''
     }
   ];
+}

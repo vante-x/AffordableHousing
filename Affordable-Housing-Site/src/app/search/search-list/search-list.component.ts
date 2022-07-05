@@ -62,7 +62,7 @@ export class SearchListComponent implements OnInit {
     );
 
     setTimeout(() => {
-      this.products = productsDB;
+      this.products = productsDB.Product;
       this.markers = markersDB.Markers;
       this.isLoaded = true
     }, 500)

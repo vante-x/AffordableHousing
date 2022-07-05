@@ -86,7 +86,7 @@ export class EsriMapComponent implements OnInit, OnDestroy {
   }
 
   getProducts(): Product[] {
-    return productsDB;
+    return productsDB.Product;
   }
   
   //find one product from the id in the query string
@@ -216,7 +216,7 @@ export class EsriMapComponent implements OnInit, OnDestroy {
     }
     else{*/
 
-      for (let product of productsDB){
+      for (let product of productsDB.Product){
         // Create a point
        var point = new Point ({
          longitude: product.lng,
