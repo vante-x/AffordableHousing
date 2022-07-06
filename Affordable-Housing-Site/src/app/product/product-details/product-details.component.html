@@ -1,11 +1,12 @@
 <div class="mt-32">
-  <div class="container">
-    <div class="grid grid-cols-12 gap-8">
+  <div class="container">    
+    <div class="grid grid-cols-12 gap-8">      
       <div class="col-span-12 md:col-span-6 xl:col-span-6">
-        <a href="javascript:void(0)" class="category text-primary inline-block mb-5">Housing Type</a>
+        <div *ngFor="let product of products" >
+        <a *ngIf="product.id == id" href="javascript:void(0)" class="category text-primary inline-block mb-5"><b>Features:</b> {{product.apartmentFeatures}}</a>
      
         <!-- queries database for specific product id -->
-        <div *ngFor="let product of products" >
+       <!-- <div *ngFor="let product of products" >-->
           <h1 *ngIf="product.id == id" class="_title font-medium">{{product.name}}</h1>
 
           <h3 *ngIf="product.id == id" class="_title font-medium">{{product.address}} <br>Orlando, FL
@@ -14,42 +15,44 @@
           <!-- <h5 class="category text-primary inline-block mb-5 additional_details">2nd Floor </h5> <br> -->      
           <h5 *ngIf="product.id == id" class="category text-primary inline-block mb-5 additional_details">Minimum income requirement: $3600</h5>
           <!-- <h5 class="category text-primary inline-block mb-5 additional_details">Available from June to July</h5>-->
-        </div>
+        
 
-       <br>
-        <h6 class="amenities_languages">Energy use and gas emisions</h6>
-        <div class="amenities_details">
-         <p>Status: Participating </p>
+         <br>
+       
+        <h6 *ngIf="product.id == id"  class="amenities_languages">Energy use and gas emisions</h6>
+        <div *ngIf="product.id == id" class="amenities_details">
+        <!-- <p> Energy Use Intensity: {{product.siteEIU}} </p>-->
+         <p> Compliance: {{product.compliance}} </p>
          <div class="energy-star">
-          <img class="energy-star-img" src="assets/images/energy_star.png" alt="Energy Star"/>
-          <p class="energy-star-text"> Energy Star&#174; Score </p>
+         <!-- <img class="energy-star-img" src="assets/images/energy_star.png" alt="Energy Star"/>-->
+          <p class="energy-star-text"> Energy Star&#174; Score  {{product.energyStar}}</p>
          </div>
-         <p> Site Energy Use Intensity / sq. ft</p>
-         <p> Total Annual Greenhouse Gas Emissions</p>        
+         <p> Site Energy Use Intensity / sq. ft: {{product.siteEIU}} </p>
+         <p> Total Annual Greenhouse Gas Emissions: {{product.gasEmissions}}</p>        
          </div>
-         <h6 class="amenities_languages">Building use, size and year</h6>
-        <div class="amenities_details">
-         <p> Primary use type</p>
-         <p> Size (sq. ft) </p>
-         <p> Year built </p>
+         <h6 *ngIf="product.id == id" class="amenities_languages">Building size, year and apartment size</h6>
+        <div *ngIf="product.id == id" class="amenities_details">
+         <p> Builduing size: {{product.buildingSize}} </p>
+         <p> Year built: {{product.yearBuilt}} </p>
+         <p> Apartment size (sq. ft): {{product.sqrFt}} </p>
+         <p>Floor plan: {{product.beds}} and {{product.baths}}</p>
         </div>
-
+        
         <!-- queries database for specific product id -->
-          <div class="border-b text-center pt-5 pb-5">
-            <div *ngFor="let product of products">
-              <div *ngIf="product.id == id" class="text-primary text-2xl font-semibold">${{product.price}}</div>
+        <h6 *ngIf="product.id == id" class="category text-primary text-center">Monthly Rent</h6>
+          <div *ngIf="product.id == id" class="border-b text-center pt-2 pb-2">
+            <!--<div *ngFor="let product of products">-->
+              <div class="text-primary text-2xl font-semibold">${{product.price}}</div>
               </div>
-            </div>
-
-      <div class="category text-primary text-center">Monthly Rent</div>
-      <h6 class="expenses_title">Other monthly expenses</h6>
-      <div class="other_expenses">
+            <!--</div>-->      
+      <h6 *ngIf="product.id == id" class="expenses_title">Other monthly expenses</h6>
+      <div *ngIf="product.id == id" class="other_expenses">
         
         <!-- queries database for specific product id and adds rental price + utilityEstimate-->
-        <div *ngFor="let product of products">
-          <p *ngIf="product.id == id">Electricity: ${{product.utilityEstimate}}</p>
-          <h6 *ngIf="product.id == id" class="expenses_title">Total estimated expenses: &nbsp; &nbsp; &nbsp; ${{product.utilityEstimate + product.price}}</h6>
-        </div>
+        <!--<div *ngFor="let product of products">-->
+          <p>Electricity: ${{product.utilityEstimate}}</p>
+          <h6 class="expenses_title">Total estimated expenses: &nbsp; &nbsp; &nbsp; ${{product.utilityEstimate + product.price}}</h6>
+        <!--</div>-->
 
        <!-- <p>Gas: $20</p>
         <p>Water $30</p>
@@ -57,7 +60,7 @@
         <p>Internet: $60</p>
         <p>Cable: $20</p>-->
       </div>
-        <div class="border-b px-5 pt-10 pb-12 text-center">
+        <div *ngIf="product.id == id" class="border-b px-5 pt-10 pb-12 text-center">
           <button mat-flat-button class="py-3 px-20 text-xl font-bold" color="accent"
           [swal]="{ title: 'You will be redirected to an external website', showDenyButton: true, denyButtonText:'Do not open the link'}" 
           (confirm)="openNewPage()"
@@ -72,27 +75,29 @@
         <p>Spanish</p>
         <p>Creole</p>
         </div>-->
-        <ul class="product-meta flex flex-wrap items-center mt-8 mb-8">
+        <ul *ngIf="product.id == id" class="product-meta flex flex-wrap items-center mt-8 mb-8">
           <li class="mr-4">
             <a class="flex items-center pr-4 py-1 hover:text-primary" href="javascript:void(0)">
               
                 <mat-icon class="mr-2" color="warn">stars</mat-icon> 
               <!-- queries database for specific product id -->
-              <div *ngFor="let product of products">
+              <!--<div *ngFor="let product of products">-->
                 <div *ngIf="product.id == id" >
                   {{product.rating}}/5
                 </div>
-              </div>
+              <!--</div>-->
 
             </a>
           </li>
-
+        
           <li class="mr-4">
             <a class="flex items-center pr-4 py-1 hover:text-primary" href="javascript:void(0)"
               ><mat-icon class="mr-2">share</mat-icon> Share</a
             >
           </li>
         </ul>
+       
+    </div>    
         <!--<img class="w-full" src="assets/images/products/apartmentPhoto.gif" alt="img not found" />-->
         <div class="ll-content mt-8">
           <!--<h5>Special text field</h5>-->
@@ -104,7 +109,7 @@
           <!--<blockquote class="quote">"I have consistently experienced the best residential support
              services of my life with AAA Property Management"</blockquote>-->
         </div>
-        </div>
+      </div>
       <div class="col-span-12 md:col-span-6 xl:col-span-6"> 
         <div>  
           <form >
@@ -159,6 +164,7 @@
         <!--<div class="border mt-5 px-5 py-10 text-center">
           <button mat-stroked-button class="py-2 px-12 text-lg font-bold text-gray-700">Extra Button</button>
         </div>-->
-      </div>
+    
     </div>
   </div>
+</div>
