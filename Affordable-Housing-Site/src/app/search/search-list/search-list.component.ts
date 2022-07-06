@@ -6,6 +6,8 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { Routes } from '@angular/router';
 import { ProductDetailsComponent } from '../../product/product-details/product-details.component';
+import { markersDB } from 'src/app/shared/data/markers';
+
 
 export const routes: Routes = [
   { path: './products/:id', component: ProductDetailsComponent}
@@ -26,7 +28,7 @@ export class SearchListComponent implements OnInit {
     // Set our map properties
     mapCenter = [ -81.379234, 28.538336];
     basemapType = 'streets-navigation-vector';
-    mapZoomLevel = 12;
+    mapZoomLevel = 11;
 
     //variable for search by 'address' or 'neighborhood'
     searchPreference: String = '';
@@ -41,6 +43,8 @@ export class SearchListComponent implements OnInit {
   
     //variable for products db
     products: any[] = [];
+
+    markers: any[] = [];
 
   isLoaded: boolean = false;
   advanceSearchExpanded: boolean = false;
@@ -59,6 +63,7 @@ export class SearchListComponent implements OnInit {
 
     setTimeout(() => {
       this.products = productsDB.Product;
+      this.markers = markersDB.Markers;
       this.isLoaded = true
     }, 500)
   }
@@ -72,5 +77,7 @@ export class SearchListComponent implements OnInit {
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
+
 }
+
 
