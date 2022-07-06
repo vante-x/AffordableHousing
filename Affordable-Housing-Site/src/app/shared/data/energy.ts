@@ -36,15 +36,22 @@ export class energyDB {
         cirlceSize:20
       },
       {
-        lat:28.561393243691317,
-        lng:-81.3879497931943,
+        lat:28.661393243691317,
+        lng:-81.4879497931943,
         color: [0, 0, 255,.6],//blue
         energyRating:'Superior',
         cirlceSize:40
       },
       {
-        lat:28.580388687906357,
-        lng: -81.38588985667086,
+        lat:28.410933076019487,
+        lng:-81.49116771921969,
+        color: [0, 204, 0,.6],//green
+        energyRating:'Excellent',
+        cirlceSize:35
+      },
+      {
+        lat:28.490388687906357,
+        lng: -81.32588985667086,
         color: [102, 0, 204,.6],//purple
         energyRating:'Good',
         cirlceSize:30
@@ -64,8 +71,8 @@ export class energyDB {
         cirlceSize:20
       },
       {
-        lat:28.563504017948954,
-        lng:-81.352415888165,
+        lat:28.593504017948954,
+        lng:-81.392415888165,
         color: [0, 0, 255,.6],//blue
         energyRating:'Superior',
         cirlceSize:40
@@ -78,8 +85,8 @@ export class energyDB {
         cirlceSize:35
       },
       {
-        lat:28.56290094390906,
-        lng:-81.36941036448336,
+        lat:28.51290094390906,
+        lng:-81.39941036448336,
         color: [102, 0, 204,.6],//purple
         energyRating:'Good',
         cirlceSize:30
@@ -92,22 +99,29 @@ export class energyDB {
         cirlceSize:25
       },
       {
-        lat:28.531234705011673,
-        lng: -81.39069637522555,
+        lat:28.42234705011673,
+        lng: -81.42069637522555,
         color: [255, 0, 0,.6],//red
         energyRating:'Non-Compliant',
         cirlceSize:20
       },
       {
-        lat:28.561393243691317,
-        lng:-81.3879497931943,
+        lat:28.571393243691317,
+        lng:-81.4879497931943,
         color: [0, 0, 255,.6],//blue
         energyRating:'Superior',
         cirlceSize:40
       },
       {
-        lat:28.580388687906357,
-        lng: -81.38588985667086,
+        lat:28.630933076019487,
+        lng:-81.30116771921969,
+        color: [0, 204, 0,.6],//green
+        energyRating:'Excellent',
+        cirlceSize:35
+      },
+      {
+        lat:28.540388687906357,
+        lng: -81.29588985667086,
         color: [102, 0, 204,.6],//purple
         energyRating:'Good',
         cirlceSize:30
@@ -120,7 +134,7 @@ export class energyDB {
         cirlceSize:25
       },
       {
-        lat: 28.565225490654658,
+        lat: 28.595225490654658,
         lng:-81.32972717285156,
         color: [255, 0, 0,.6],//red
         energyRating:'Non-Compliant',
@@ -128,8 +142,8 @@ export class energyDB {
       },
       //
       {
-        lat:28.565422579910503,
-        lng:-81.39188169741045,
+        lat:28.595422579910503,
+        lng:-81.41188169741045,
         color: [0, 0, 255,.6],//blue
         energyRating:'Superior',
         cirlceSize:40
@@ -143,7 +157,7 @@ export class energyDB {
       },
       {
         lat:28.61425920488586,
-        lng: -81.37402891515237,
+        lng: -81.29402891515237,
         color: [102, 0, 204,.6],//purple
         energyRating:'Good',
         cirlceSize:30
@@ -156,18 +170,25 @@ export class energyDB {
         cirlceSize:25
       },
       { 
-        lat:28.548535508832632,
-        lng: -81.37059568779506,
+        lat:28.568535508832632,
+        lng: -81.31059568779506,
         color: [255, 0, 0,.6],//red
         energyRating:'Non-Compliant',
         cirlceSize:20
       },
       {
-        lat:28.533153855554204, 
+        lat:28.693153855554204, 
         lng:-81.40784620462199,
         color: [0, 0, 255,.6],//blue
         energyRating:'Superior',
         cirlceSize:40
+      },
+      {
+        lat:28.570933076019487,
+        lng:-81.49116771921969,
+        color: [0, 204, 0,.6],//green
+        energyRating:'Excellent',
+        cirlceSize:35
       },
       {
         lat:28.549741818023676,
@@ -184,15 +205,15 @@ export class energyDB {
         cirlceSize:25
       },
       {
-        lat: 28.565225490654658,
+        lat: 28.615225490654658,
         lng:-81.32972717285156,
         color: [255, 0, 0,.6],//red
         energyRating:'Non-Compliant',
         cirlceSize:20
       },
       { 
-        lat:28.53194735640056,
-        lng:-81.40029310443587,
+        lat:28.43194735640056,
+        lng:-81.20029310443587,
         color: [0, 0, 255,.6],//blue
         energyRating:'Superior',
         cirlceSize:40
@@ -219,18 +240,25 @@ export class energyDB {
         cirlceSize:25
       },
       { 
-        lat:28.537225688216285,
-        lng: -81.39986395101623,
+        lat:28.337225688216285,
+        lng: -81.42986395101623,
         color: [255, 0, 0,.6],//red
         energyRating:'Non-Compliant',
         cirlceSize:20
       },
       {
-        lat:28.52832777606507,
-        lng: -81.39042257578357,
+        lat:28.49832777606507,
+        lng: -81.29042257578357,
         color: [0, 0, 255,.6],//blue
         energyRating:'Superior',
         cirlceSize:40
+      },
+      {
+        lat:28.580933076019487,
+        lng:-81.37116771921969,
+        color: [0, 204, 0,.6],//green
+        energyRating:'Excellent',
+        cirlceSize:35
       },
       {
         lat:28.580388687906357,
@@ -247,16 +275,16 @@ export class energyDB {
         cirlceSize:25
       },
       { 
-        lat: 28.52908186555273,
-        lng:-81.39866232144117,
+        lat: 28.55908186555273,
+        lng:-81.19866232144117,
         color: [255, 0, 0,.6],//red
         energyRating:'Non-Compliant',
         cirlceSize:20
       },
       //
       {
-        lat:28.563504017948954,
-        lng:-81.352415888165,
+        lat:28.443504017948954,
+        lng:-81.252415888165,
         color: [0, 0, 255,.6],//blue
         energyRating:'Superior',
         cirlceSize:40
@@ -283,18 +311,25 @@ export class energyDB {
         cirlceSize:25
       },
       {
-        lat:28.55109889934649,
-        lng: -81.38012289371162,
+        lat:28.58109889934649,
+        lng: -81.48012289371162,
         color: [255, 0, 0,.6],//red
         energyRating:'Non-Compliant',
         cirlceSize:20
       },
       {
-        lat:28.561393243691317,
-        lng:-81.3879497931943,
+        lat:28.421393243691317,
+        lng:-81.2979497931943,
         color: [0, 0, 255,.6],//blue
         energyRating:'Superior',
         cirlceSize:40
+      },
+      {
+        lat:28.530933076019487,
+        lng:-81.34116771921969,
+        color: [0, 204, 0,.6],//green
+        energyRating:'Excellent',
+        cirlceSize:35
       },
       { 
         lat:28.528176957520127,
@@ -347,8 +382,8 @@ export class energyDB {
         cirlceSize:25
       },
       { 
-        lat:28.532399795201876,
-        lng: -81.35265707485304,
+        lat:28.492399795201876,
+        lng: -81.25265707485304,
         color: [255, 0, 0,.6],//red
         energyRating:'Non-Compliant',
         cirlceSize:20
@@ -359,6 +394,13 @@ export class energyDB {
         color: [0, 0, 255,.6],//blue
         energyRating:'Superior',
         cirlceSize:40
+      },
+      {
+        lat:28.550933076019487,
+        lng:-81.45116771921969,
+        color: [0, 204, 0,.6],//green
+        energyRating:'Excellent',
+        cirlceSize:35
       },
       {
         lat:28.537225688216285,

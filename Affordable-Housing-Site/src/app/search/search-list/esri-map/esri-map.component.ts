@@ -189,8 +189,8 @@ export class EsriMapComponent implements OnInit, OnDestroy {
           style: "circle",
           Text: energy.energyRating,
           outline: {
-            color: [0, 0, 0], // black
-            width: 2
+            color:  energy.color,
+            width: 1
           },
           label: energy.energyRating
         };
