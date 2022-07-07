@@ -13,7 +13,14 @@ import {ActivatedRoute} from '@angular/router';
 
 export class ProductDetailsComponent implements OnInit {
   
+      //variable for products table
+      products: any[] = [];
 
+  // ARCGIS MAP
+    // Set our map properties
+    mapCenter = [ -81.379234, 28.538336];
+    basemapType = 'streets-navigation-vector';
+    mapZoomLevel = 12;
 
     title = 'app';
     radioSel:any;
@@ -29,7 +36,7 @@ export class ProductDetailsComponent implements OnInit {
       return this.form.controls;
     }
 
-
+/*
     changeMap(e: any) {
 
       if(e.target.value == 'map')
@@ -47,9 +54,9 @@ export class ProductDetailsComponent implements OnInit {
       if(e.target.value == 'schools')
       { this.mapsource= "/assets/images/google-maps/map_schools.jpg" ;}
     }
-  
-    //variable for products table
-    products: any[] = [];
+  */
+
+
 
     //variable for product.id passed from home.component to query database
     id: number = 1;
@@ -59,6 +66,9 @@ export class ProductDetailsComponent implements OnInit {
       
       //reference to the products db
       this.products = productsDB.Product
+
+
+
 
       //pulls product id from url routerlink query
       this.route.params.subscribe(params => {

@@ -8,9 +8,11 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ProductHeroComponent } from './product-list/product-hero/product-hero.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { EsriDetailsMapComponent } from './product-details/esri-details-map/esri-details-map.component';
+//import { EsriMapComponent } from "./../search/search-list/esri-map/esri-map.component" ;
 
 @NgModule({
-  declarations: [ProductListComponent, ProductDetailsComponent, ProductHeroComponent],
+  declarations: [ProductListComponent, ProductDetailsComponent, ProductHeroComponent, EsriDetailsMapComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,
@@ -21,6 +23,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     SweetAlert2Module.forRoot(),
     SweetAlert2Module,
     SweetAlert2Module.forChild({/*options*/})
-  ]
+  ], 
+  exports: [EsriDetailsMapComponent]
 })
 export class ProductModule { }
