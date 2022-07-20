@@ -164,6 +164,7 @@
                 <!-- queries database for specific product id -->
                 <div *ngFor="let product of products">
                   <p *ngIf="product.id == id" class="mt-2">&#9742; {{product.contactNumber}}</p>
+                  <img *ngIf="product.id == id" src="{{product.images[0]}}" alt="apartment image"/>
                 </div>
               </div>
             </div>
