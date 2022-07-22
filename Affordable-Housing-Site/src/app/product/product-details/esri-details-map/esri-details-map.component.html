@@ -1,38 +1,45 @@
 <!-- Here's the DIV that we inject the map into -->
 <div #mapViewNode></div>
-<div>
-    <table cellPadding="10" cellSpacing="10" border="black">
-        <tr>
-            <td width="20px" height="20px" bgcolor="blue">
-    
-            </td>
-            <td width="50px">
-                SUPERIOR
-            </td>
-            <td width="20px" height="20px" bgcolor="green">
-    
-            </td>
-            <td width="50px">
-                EXCELLENT
-            </td>
-            <td width="20px" height="20px" bgcolor="purple">
-    
-            </td>
-            <td width="50px">
-                GOOD
-            </td>
-            <td width="20px" height="20px" bgcolor="yellow">
-    
-            </td>
-            <td width="50px">
-                POOR
-            </td>
-            <td width="20px" height="20px" bgcolor="red">
-    
-            </td>
-            <td>
-                NON-COMPLIANT
-            </td>
-        </tr>
-    </table> 
+<div class="flex flex-wrap justify-center mt-1" style="text-align: center;">
+
+    <div>
+        <table cellPadding="10" cellSpacing="10" border="black">
+            <tr>
+                <td width="3%" height="20px">
+                    <img id="superiorMarker" src="https://maps.google.com/mapfiles/ms/icons/blue.png" alt="Superior Marker">
+                </td>
+                <td width="50px">
+                    SUPERIOR
+                </td>
+                <td width="3%" height="20px">
+                    <img id="excellentMarker" src="https://maps.google.com/mapfiles/ms/icons/green.png" alt="Excellent Marker">
+
+                </td>
+                <td width="50px">
+                    EXCELLENT
+                </td>
+                <td width="3%" height="20px">
+                    <img id="goodMarker" src="https://maps.google.com/mapfiles/ms/icons/purple.png" alt="Good Marker">
+
+                </td>
+                <td width="50px">
+                    GOOD
+                </td>
+                <td width="3%" height="20px">
+                    <img id="poorMarker" src="https://maps.google.com/mapfiles/ms/icons/yellow.png" alt="Poor Marker">
+
+                </td>
+                <td width="50px">
+                    POOR
+                </td>
+                <td width="3%" height="20px">
+                    <img id="noncompliantMarker" src="https://maps.google.com/mapfiles/ms/icons/red.png" alt="Non-compliant Marker">
+
+                </td>
+                <td width="50px">
+                    NON-COMPLIANT
+                </td>
+            </tr>
+        </table> 
+    </div>
 </div>

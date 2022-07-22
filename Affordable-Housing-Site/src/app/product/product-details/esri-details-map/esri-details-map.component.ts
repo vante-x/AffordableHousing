@@ -211,7 +211,7 @@ export class EsriDetailsMapComponent implements OnInit, OnDestroy {
           symbol: SimpleFillSymbol
         });
         
-       graphicsLayer.add(pointGraphic);    
+      //  graphicsLayer.add(pointGraphic);    
 
       }
 
@@ -222,35 +222,53 @@ export class EsriDetailsMapComponent implements OnInit, OnDestroy {
         latitude: this.myProduct.lat
       });
 
-      var PropertySymbol = {
-        type: "simple-marker", //
-        color: [251,52,153], 
-        size: 25,
-        style: "square",
-        text: 
-        "<table ><tr><th style='border: 1px solid grey; padding: 10px''>Name:  </th> <td style='border: 1px solid grey; padding: 10px''> <a href='localhost:4200/contacts' style='color: #004B8D;'>" + this.myProduct.name + "</a></td></tr>" +
-        "<tr><th style='border: 1px solid grey; padding: 10px''>Address:  </th><td style='border: 1px solid grey; padding: 10px'>" + this.myProduct.address + "</td></tr></table>",
-        outline: {
-          color: [0, 0, 255], // black
-          width: 2
-        }
-      };
+      var propertySymbol = {
+        type: 'picture-marker',
+        url: "https://maps.google.com/mapfiles/ms/icons/" + this.myProduct.color + ".png", 
+        contentType: 'image/png',
+        width: '36px',
+        height: '32px',
+        xoffset: -10,
+        yoffset: 24
+        };
         var pointGraphic = new Graphic({
         geometry: webMercatorUtils.geographicToWebMercator(point),
-        symbol: PropertySymbol
+        symbol: propertySymbol
       });
 
-      var template = new PopupTemplate ({
-        title: this.setTitle(this.myProduct.name),
-          // title: "Property Details",
-        content: [{
-          type: "text",
-          text: 
-          "<table ><tr><th style='border: 1px solid grey; padding: 10px''>Name:  </th> <td style='border: 1px solid grey; padding: 10px''> <a href='localhost:4200/contacts' style='color: #004B8D;'>" + this.myProduct.name + "</a></td></tr>" +
-          "<tr><th style='border: 1px solid grey; padding: 10px''>Address:  </th><td style='border: 1px solid grey; padding: 10px'>" + this.myProduct.address + "</td></tr></table>"
-        }]
+      var homeMarkerTemplate = new PopupTemplate ({
+        title: "Property Details",
+        content: [
+          {
+            // Autocasts as new TextContent()
+            type: "text",
+            text: "<b>" + this.myProduct.name + "</b><br><b>Units</b>: " + this.myProduct.beds + "/" + this.myProduct.baths 
+            + "<br><b>Rent</b>: $" + this.myProduct.price + "/month"
+            + "<br><b>Utility Estimate</b>: $" + this.myProduct.utilityEstimate
+          },
+          {
+            type: "media",
+            mediaInfos: [
+              {
+                title: "",
+                type: "image", // Autocasts as new ImageMediaInfo()
+                caption: "",
+                // Autocasts as new ImageMediaInfoValue()
+                value: {
+                  sourceURL: this.myProduct.image1
+                }
+              }
+            ]
+          }, 
+          {
+            // if attachments are associated with feature, display it.
+            // Autocasts as new AttachmentsContent()
+            type: "attachments"
+          }
+        ]
       });
-        pointGraphic.popupTemplate = template
+
+        pointGraphic.popupTemplate = homeMarkerTemplate
 
       graphicsLayer.add(pointGraphic);   
     })
