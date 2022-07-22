@@ -4,8 +4,8 @@
     <div class="border overflow-hidden sm:rounded-md p-5">
       <div class="container">
         <div class="">
-          <div class="grid gap-2 grid-cols-2 ">
-            <div class="col-span-1" style="object-fit:scale-down;">
+          <div class="grid gap-2 grid-cols-5 ">
+            <div class="col-span-2" style="object-fit:scale-down;">
               <div>
                 <h1 class="rounded-md bg-white bg-opacity-10 pt-20" style=" font-size: 20px;
                 line-height: 50px;
@@ -79,13 +79,15 @@
                   </mat-radio-group>
                 </div>          
               </div>
-            </div>
+            </div >
+            <div class="col-span-3">
                   <app-esri-map
                     [center]="mapCenter"
                     [basemap]="basemapType"
                     [zoom]="mapZoomLevel"
                   >
                   </app-esri-map>
+            </div>
           </div>
         </div>
       </div>
@@ -97,10 +99,6 @@
 <!-- PRODUCTS TABLE -->
 <div>
   <div class="container">
-    <div class="ll-section-head text-center mb-5"><br><br>
-      <h3 class="ll-service__title text-center font-extralight mb-12">Featured Housing</h3>
-      <h4 class="ll-section-head__subheading">Top most affordable housing today.</h4>
-    </div>
     <div> 
       <mat-table #table [dataSource]="products" class="mat-elevation-z8">
 
