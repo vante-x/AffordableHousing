@@ -16,10 +16,6 @@ import { Product } from "src/app/shared/data/product";
 import { energyDB } from "src/app/shared/data/energy";
 import esri = __esri; // Esri TypeScript Types
 import {ActivatedRoute} from '@angular/router';
-import * as GraphicsLayer from 'esri/layers/GraphicsLayer';
-import * as Point from 'esri/geometry/Point';
-import * as Graphic from 'esri/Graphic';
-import * as webMercatorUtils from 'esri/geometry/support/webMercatorUtils';
 import {} from 'esri/popup/FieldInfo';
 import {} from 'esri/symbols/SimpleFillSymbol';
 import {} from 'esri/popup/content/Content';
@@ -159,6 +155,10 @@ export class EsriMapComponent implements OnInit, OnDestroy {
     return  "<font size='1.5'>" + title
   }
 
+  setImgURL(color: String) {
+    return  "'https://maps.google.com/mapfiles/ms/icons/" + color + ".png'" 
+  }
+
   private setGraphics(map: esri.Map) {
     
     loadModules([
@@ -169,7 +169,9 @@ export class EsriMapComponent implements OnInit, OnDestroy {
       'esri/geometry/support/webMercatorUtils',
       'esri/popup/FieldInfo',
       'esri/symbols/SimpleFillSymbol',
-      'esri/popup/content/Content']).then(([GraphicsLayer, PopupTemplate, Point, Graphic, webMercatorUtils]) => { 
+      'esri/popup/content/Content',
+      'esri/symbols/PictureMarkerSymbol',
+      'esri/popup/FieldInfo']).then(([GraphicsLayer, PopupTemplate, Point, Graphic, webMercatorUtils, PictureMarkerSymbol, FieldInfo]) => { 
     
         var graphicsLayer = new GraphicsLayer();
 
@@ -218,7 +220,7 @@ export class EsriMapComponent implements OnInit, OnDestroy {
          symbol: SimpleFillSymbol
        });
 
-       graphicsLayer.add(pointGraphic);    
+      //  graphicsLayer.add(pointGraphic);    
 
       }
 
@@ -229,42 +231,86 @@ export class EsriMapComponent implements OnInit, OnDestroy {
          latitude: product.lat
        });
 
-       var PropertySymbol2 = {
-         type: "simple-marker", //
-         color: [251,52,153], 
-         size: 15,
-         style: "square",
-         text: 
-         "<table ><tr><th style='border: 1px solid grey; padding: 10px''>Name:  </th> <td style='border: 1px solid grey; padding: 10px''> <a href='localhost:4200/contacts' style='color: #004B8D;'>" + product.name + "</a></td></tr>" +
-         "<tr><th style='border: 1px solid grey; padding: 10px''>Address:  </th><td style='border: 1px solid grey; padding: 10px'>" + product.address + "</td></tr></table>",
-         outline: {
-           color: [0, 0, 255], // black
-           width: 1
-         }
-       };
-         var pointGraphic2 = new Graphic({
+       var propertySymbol = {
+        type: 'picture-marker',
+        url: "https://maps.google.com/mapfiles/ms/icons/" + product.color + ".png", 
+        contentType: 'image/png',
+        width: '36px',
+        height: '32px',
+        xoffset: -10,
+        yoffset: 24
+        };
+
+      //  var PropertySymbol2 = {
+      //    type: "simple-marker", //
+      //    color: [251,52,153], 
+      //    size: 15,
+      //    style: "square",
+      //    text: 
+      //    "<table ><tr><th style='border: 1px solid grey; padding: 10px''>Name:  </th> <td style='border: 1px solid grey; padding: 10px''> <a href='localhost:4200/contacts' style='color: #004B8D;'>" + product.name + "</a></td></tr>" +
+      //    "<tr><th style='border: 1px solid grey; padding: 10px''>Address:  </th><td style='border: 1px solid grey; padding: 10px'>" + product.address + "</td></tr></table>",
+      //    outline: {
+      //      color: [0, 0, 255], // black
+      //      width: 1
+      //    }
+      //  };
+
+      var pointGraphic2 = new Graphic({
          geometry: webMercatorUtils.geographicToWebMercator(point2),
-         symbol: PropertySymbol2
+         symbol: propertySymbol
        });
 
-       var template = new PopupTemplate ({
-         title: this.setTitle(product.name),
-           // title: "Property Details",
-         content: [{
-           type: "text",
-           text: 
-           "<table ><tr><th style='border: 1px solid grey; padding: 10px''>Name:  </th> <td style='border: 1px solid grey; padding: 10px''> <a href='localhost:4200/contacts' style='color: #004B8D;'>" + product.name + "</a></td></tr>" +
-           "<tr><th style='border: 1px solid grey; padding: 10px''>Address:  </th><td style='border: 1px solid grey; padding: 10px'>" + product.address + "</td></tr></table>"
-         }]
-       });
-         pointGraphic2.popupTemplate = template
+
+      //  {
+      //   title: "<b>Count by type</b>",
+      //   type: "pie-chart", // Autocasts as new PieChartMediaInfo()
+      //   caption: "",
+      //   // Autocasts as new ChartMediaInfoValue()
+      //   value: {
+      //     fields: [ "relationships/0/Point_Count_COMMON" ],
+      //     normalizeField: null,
+      //     tooltipField: "relationships/0/COMMON"
+      //   }
+      // }, 
+
+       var homeMarkerTemplate = new PopupTemplate ({
+        title: "Property Details",
+        content: [
+          {
+            // Autocasts as new TextContent()
+            type: "text",
+            text: "<b>" + product.name + "</b><br><b>Units</b>: " + product.beds + "/" + product.baths 
+            + "<br><b>Rent</b>: $" + product.price + "/month"
+            + "<br><b>Utility Estimate</b>: $" + product.utilityEstimate
+            + "<br><br><a href='http://localhost:4200/products/" + product.id + "' style='color: blue;'> Click here for property details.</a>" ,
+          },
+          {
+            type: "media",
+            mediaInfos: [
+              {
+                title: "",
+                type: "image", // Autocasts as new ImageMediaInfo()
+                caption: "",
+                // Autocasts as new ImageMediaInfoValue()
+                value: {
+                  sourceURL: product.image1
+                }
+              }
+            ]
+          }, 
+          {
+            // if attachments are associated with feature, display it.
+            // Autocasts as new AttachmentsContent()
+            type: "attachments"
+          }
+        ]
+      });
+
+        pointGraphic2.popupTemplate = homeMarkerTemplate
 
        graphicsLayer.add(pointGraphic2);    
 
         }
-
-
-      
     })
   }
 }
