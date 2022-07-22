@@ -34,7 +34,7 @@ export class productsDB {
                   description: 'About SoBe Apartment Rentals. Welcome to South Beach Rental Apartments, where you can find an affordable luxury apartment.  Our leasing specialists will show you a variety of apartments in your price range.  We have full service buildings with full service amenities.  We accept pets.  We will work with all credit situations.  Let South Beach Rental Apartmentds find your new home and make your move a more pleasurable experience. ',
                   amenities: 'Pool, Fitness Center, Laundry Facilities, Furnished Units Available, Elevator, Gated, Picnic Area',
                   apartmentFeatures: 'Air Conditioning, Dishwasher, High Speed Internet, Hardwood Floors, Ceiling Fans, Dishwasher, Range, Refrigerator, Walk in closets, Balcony',
-                  image1: 'https://images1.apartments.com/i2/cs0Cu8ytY9zn8aI0V3DcsPiSca-7KgPPd-tOowXs5Uw/111/sobe-aprtment-rentals-miami-beach-fl-primary-photo.jpg?p1', //not working
+                  image1: 'https://images1.apartments.com/i2/zeVkRvaVdGj3poM-HZudkcEW8a3uYkl_-OBbNzRg2gc/116/bainbridge-winter-park-winter-park-fl-building-photo.jpg?p=1', 
                   image2: '',
                   image3: ''
             },
@@ -72,7 +72,7 @@ export class productsDB {
                   description: 'About SoBe Apartment Rentals. Welcome to South Beach Rental Apartments, where you can find an affordable luxury apartment.  Our leasing specialists will show you a variety of apartments in your price range.  We have full service buildings with full service amenities.  We accept pets.  We will work with all credit situations.  Let South Beach Rental Apartmentds find your new home and make your move a more pleasurable experience. ',
                   amenities: 'Pool, Fitness Center, Laundry Facilities, Furnished Units Available, Elevator, Gated, Picnic Area',
                   apartmentFeatures: 'Air Conditioning, Dishwasher, High Speed Internet, Hardwood Floors, Ceiling Fans, Dishwasher, Range, Refrigerator, Walk in closets, Balcony',
-                  image1: 'https://images1.apartments.com/i2/cs0Cu8ytY9zn8aI0V3DcsPiSca-7KgPPd-tOowXs5Uw/111/sobe-aprtment-rentals-miami-beach-fl-primary-photo.jpg?p1', //not working
+                  image1: 'https://images1.apartments.com/i2/zeVkRvaVdGj3poM-HZudkcEW8a3uYkl_-OBbNzRg2gc/116/bainbridge-winter-park-winter-park-fl-building-photo.jpg?p=1', 
                   image2: '',
                   image3: ''
             },
@@ -110,7 +110,7 @@ export class productsDB {
                   description: 'About SoBe Apartment Rentals. Welcome to South Beach Rental Apartments, where you can find an affordable luxury apartment.  Our leasing specialists will show you a variety of apartments in your price range.  We have full service buildings with full service amenities.  We accept pets.  We will work with all credit situations.  Let South Beach Rental Apartmentds find your new home and make your move a more pleasurable experience. ',
                   amenities: 'Pool, Fitness Center, Laundry Facilities, Furnished Units Available, Elevator, Gated, Picnic Area',
                   apartmentFeatures: 'Air Conditioning, Dishwasher, High Speed Internet, Hardwood Floors, Ceiling Fans, Dishwasher, Range, Refrigerator, Walk in closets, Balcony',
-                  image1: 'https://images1.apartments.com/i2/cs0Cu8ytY9zn8aI0V3DcsPiSca-7KgPPd-tOowXs5Uw/111/sobe-aprtment-rentals-miami-beach-fl-primary-photo.jpg?p1', //not working
+                  image1: 'https://images1.apartments.com/i2/zeVkRvaVdGj3poM-HZudkcEW8a3uYkl_-OBbNzRg2gc/116/bainbridge-winter-park-winter-park-fl-building-photo.jpg?p=1', 
                   image2: '',
                   image3: ''
             },
@@ -148,7 +148,7 @@ export class productsDB {
                   description: 'About SoBe Apartment Rentals. Welcome to South Beach Rental Apartments, where you can find an affordable luxury apartment.  Our leasing specialists will show you a variety of apartments in your price range.  We have full service buildings with full service amenities.  We accept pets.  We will work with all credit situations.  Let South Beach Rental Apartmentds find your new home and make your move a more pleasurable experience. ',
                   amenities: 'Pool, Fitness Center, Laundry Facilities, Furnished Units Available, Elevator, Gated, Picnic Area',
                   apartmentFeatures: 'Air Conditioning, Dishwasher, High Speed Internet, Hardwood Floors, Ceiling Fans, Dishwasher, Range, Refrigerator, Walk in closets, Balcony',
-                  image1: 'https://images1.apartments.com/i2/cs0Cu8ytY9zn8aI0V3DcsPiSca-7KgPPd-tOowXs5Uw/111/sobe-aprtment-rentals-miami-beach-fl-primary-photo.jpg?p1', //not working
+                  image1: 'https://images1.apartments.com/i2/zeVkRvaVdGj3poM-HZudkcEW8a3uYkl_-OBbNzRg2gc/116/bainbridge-winter-park-winter-park-fl-building-photo.jpg?p=1', 
                   image2: '',
                   image3: ''
             },
@@ -186,14 +186,14 @@ export class productsDB {
                   description: 'About SoBe Apartment Rentals. Welcome to South Beach Rental Apartments, where you can find an affordable luxury apartment.  Our leasing specialists will show you a variety of apartments in your price range.  We have full service buildings with full service amenities.  We accept pets.  We will work with all credit situations.  Let South Beach Rental Apartmentds find your new home and make your move a more pleasurable experience. ',
                   amenities: 'Pool, Fitness Center, Laundry Facilities, Furnished Units Available, Elevator, Gated, Picnic Area',
                   apartmentFeatures: 'Air Conditioning, Dishwasher, High Speed Internet, Hardwood Floors, Ceiling Fans, Dishwasher, Range, Refrigerator, Walk in closets, Balcony',
-                  image1: 'https://images1.apartments.com/i2/cs0Cu8ytY9zn8aI0V3DcsPiSca-7KgPPd-tOowXs5Uw/111/sobe-aprtment-rentals-miami-beach-fl-primary-photo.jpg?p1', //not working
+                  image1: 'https://images1.apartments.com/i2/zeVkRvaVdGj3poM-HZudkcEW8a3uYkl_-OBbNzRg2gc/116/bainbridge-winter-park-winter-park-fl-building-photo.jpg?p=1', 
                   image2: '',
                   image3: ''
             },
             {
                   id: 6,
                   images: ['assets/images/products/01-1.png', 'assets/images/products/02-2.png', 'assets/images/products/02-3.png'],
-                  name: 'CENTURY MILLENIA - First Communities',
+                  name: 'Century Millenia - First Communities',
                   price: 2300,
                   rating: 4.8,
                   feedback: 3,
@@ -224,7 +224,7 @@ export class productsDB {
                   description: 'About SoBe Apartment Rentals. Welcome to South Beach Rental Apartments, where you can find an affordable luxury apartment.  Our leasing specialists will show you a variety of apartments in your price range.  We have full service buildings with full service amenities.  We accept pets.  We will work with all credit situations.  Let South Beach Rental Apartmentds find your new home and make your move a more pleasurable experience. ',
                   amenities: 'Pool, Fitness Center, Laundry Facilities, Furnished Units Available, Elevator, Gated, Picnic Area',
                   apartmentFeatures: 'Air Conditioning, Dishwasher, High Speed Internet, Hardwood Floors, Ceiling Fans, Dishwasher, Range, Refrigerator, Walk in closets, Balcony',
-                  image1: 'https://images1.apartments.com/i2/cs0Cu8ytY9zn8aI0V3DcsPiSca-7KgPPd-tOowXs5Uw/111/sobe-aprtment-rentals-miami-beach-fl-primary-photo.jpg?p1', //not working
+                  image1: 'https://images1.apartments.com/i2/zeVkRvaVdGj3poM-HZudkcEW8a3uYkl_-OBbNzRg2gc/116/bainbridge-winter-park-winter-park-fl-building-photo.jpg?p=1', 
                   image2: '',
                   image3: ''
             },
@@ -262,14 +262,14 @@ export class productsDB {
                   description: 'About SoBe Apartment Rentals. Welcome to South Beach Rental Apartments, where you can find an affordable luxury apartment.  Our leasing specialists will show you a variety of apartments in your price range.  We have full service buildings with full service amenities.  We accept pets.  We will work with all credit situations.  Let South Beach Rental Apartmentds find your new home and make your move a more pleasurable experience. ',
                   amenities: 'Pool, Fitness Center, Laundry Facilities, Furnished Units Available, Elevator, Gated, Picnic Area',
                   apartmentFeatures: 'Air Conditioning, Dishwasher, High Speed Internet, Hardwood Floors, Ceiling Fans, Dishwasher, Range, Refrigerator, Walk in closets, Balcony',
-                  image1: 'https://images1.apartments.com/i2/cs0Cu8ytY9zn8aI0V3DcsPiSca-7KgPPd-tOowXs5Uw/111/sobe-aprtment-rentals-miami-beach-fl-primary-photo.jpg?p1', //not working
+                  image1: 'https://images1.apartments.com/i2/zeVkRvaVdGj3poM-HZudkcEW8a3uYkl_-OBbNzRg2gc/116/bainbridge-winter-park-winter-park-fl-building-photo.jpg?p=1', 
                   image2: '',
                   image3: ''
             },
             {
                   id: 8,
                   images: ['assets/images/products/01-2.png', 'assets/images/products/02-2.png', 'assets/images/products/02-3.png'],
-                  name: 'ART AVENUE - Robbins',
+                  name: 'Art Avenue - Robbins',
                   price: 3000,
                   rating: 4.8,
                   feedback: 3,
@@ -300,14 +300,14 @@ export class productsDB {
                   description: 'About SoBe Apartment Rentals. Welcome to South Beach Rental Apartments, where you can find an affordable luxury apartment.  Our leasing specialists will show you a variety of apartments in your price range.  We have full service buildings with full service amenities.  We accept pets.  We will work with all credit situations.  Let South Beach Rental Apartmentds find your new home and make your move a more pleasurable experience. ',
                   amenities: 'Pool, Fitness Center, Laundry Facilities, Furnished Units Available, Elevator, Gated, Picnic Area',
                   apartmentFeatures: 'Air Conditioning, Dishwasher, High Speed Internet, Hardwood Floors, Ceiling Fans, Dishwasher, Range, Refrigerator, Walk in closets, Balcony',
-                  image1: 'https://images1.apartments.com/i2/cs0Cu8ytY9zn8aI0V3DcsPiSca-7KgPPd-tOowXs5Uw/111/sobe-aprtment-rentals-miami-beach-fl-primary-photo.jpg?p1', //not working
+                  image1: 'https://images1.apartments.com/i2/zeVkRvaVdGj3poM-HZudkcEW8a3uYkl_-OBbNzRg2gc/116/bainbridge-winter-park-winter-park-fl-building-photo.jpg?p=1', 
                   image2: '',
                   image3: ''
             },
             {
                   id: 9,
                   images: ['assets/images/products/01-3.png', 'assets/images/products/01-2.png', 'assets/images/products/01-3.png'],
-                  name: 'WINDWARD APARTMENTS - Robbins',
+                  name: 'Windward Apartments - Robbins',
                   price: 1000,
                   rating: 1.5,
                   feedback: 3,
@@ -338,7 +338,7 @@ export class productsDB {
                   description: 'About SoBe Apartment Rentals. Welcome to South Beach Rental Apartments, where you can find an affordable luxury apartment.  Our leasing specialists will show you a variety of apartments in your price range.  We have full service buildings with full service amenities.  We accept pets.  We will work with all credit situations.  Let South Beach Rental Apartmentds find your new home and make your move a more pleasurable experience. ',
                   amenities: 'Pool, Fitness Center, Laundry Facilities, Furnished Units Available, Elevator, Gated, Picnic Area',
                   apartmentFeatures: 'Air Conditioning, Dishwasher, High Speed Internet, Hardwood Floors, Ceiling Fans, Dishwasher, Range, Refrigerator, Walk in closets, Balcony',
-                  image1: 'https://images1.apartments.com/i2/cs0Cu8ytY9zn8aI0V3DcsPiSca-7KgPPd-tOowXs5Uw/111/sobe-aprtment-rentals-miami-beach-fl-primary-photo.jpg?p1', //not working
+                  image1: 'https://images1.apartments.com/i2/zeVkRvaVdGj3poM-HZudkcEW8a3uYkl_-OBbNzRg2gc/116/bainbridge-winter-park-winter-park-fl-building-photo.jpg?p=1', 
                   image2: '',
                   image3: ''
             }
