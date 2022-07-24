@@ -164,7 +164,23 @@
                 <!-- queries database for specific product id -->
                 <div *ngFor="let product of products">
                   <p *ngIf="product.id == id" class="mt-2">&#9742; {{product.contactNumber}}</p>
-                  <img *ngIf="product.id == id" src="{{product.images[0]}}" alt="apartment image"/>
+                 <!-- <img *ngIf="product.id == id" src="{{product.images[0]}}" alt="apartment image"/>-->
+                 <div *ngIf="product.id == id" class="my-carousel">
+                  <ng-container *ngFor="let slide of product.images; let i = index">
+                    <img
+                      *ngIf="i == theIndex"
+                      [src]="slide"
+                      class="my-slide"
+                    />
+                  </ng-container>
+                  <div class="slideController">
+                  <button mat-flat-button class="mt-1 py-0 px-10 text-md-left font-bold prev" color="accent"
+                  (click)="onPrevClick()">Previous</button>
+                  <span class="index">{{theIndex + 1}}</span>
+                  <button mat-flat-button class="mt-1 py-0 px-10 text-md-right font-bold float-right next" color="accent"
+                  (click)="onNextClick()">&nbsp;&nbsp;&nbsp;Next&nbsp;&nbsp;</button>
+                  </div>
+                 </div>
                 </div>
               </div>
             </div>
