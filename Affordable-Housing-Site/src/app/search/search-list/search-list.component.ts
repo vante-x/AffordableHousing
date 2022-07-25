@@ -8,7 +8,6 @@ import { Routes } from '@angular/router';
 import { ProductDetailsComponent } from '../../product/product-details/product-details.component';
 import { markersDB } from 'src/app/shared/data/markers';
 import { COMMA, TAB, SPACE, ENTER } from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { MatTableDataSource } from '@angular/material/table';
 
 export const routes: Routes = [
@@ -48,14 +47,14 @@ export class SearchListComponent implements OnInit {
     myControl = new FormControl();
     options: string[] = ['33rd Street Industrial','Airport North','Audubon Park','Azalea Park','BalBay','Baldwin Park','Bel Air','Beltway Commerce','Boggy Creek','Bryn Mawr','Callahan','Camellia Gardens','Carver Shores','Catalina','Central Business District','Clear Lake','College Park','Colonialtown Center','Colonialtown North','Colonialtown South','Conway','Countryside','Coytown','Crescent Park','Delaney Park','Dixie Belle','Dover Estates','Dover Manor','Dover Shores East','Dover Shores West','Eagles Nest','East Park','Engelwood Park','Florida Center','Florida Center North','Florida Central North','Haralson Estates','Hibiscus','Holden Heights','Holden Parramore','Johnson Village','Kirkman North','Kirkman South','Lake Cherokee','Lake Como','Lake Copeland','Lake Davis Greenwood','Lake Dot','Lake Eola Heights','Lake Fairview','Lake Formosa','Lake Fredrica','Lake Holden','Lake Mann Estates','Lake Mann Gardens','Lake Nona Central','Lake Nona Estates','Lake Nona South','Lake Richmond','Lake Shore Village','Lake Sunset','Lake Terrace','Lake Underhill','Lake Weldona','Lake Whippoorwill','Lancaster Park','LaVina','Lawsona Fern Creek','Lorna Doone','Malibu Groves','Mariners Village','Mercy Drive','Meridian Park','Metro West','Milk District','Millenia','Monterey','New Malibu','North Lake Park At Lake Nona','North Orange','North Quarter','Orlando Executive Airport','Orlando International Airport','Orwin Manor','Palomar','Park Central','Park Lake Highland','Pershing','Pineloch','Princeton/Silver Star','Randal Park','Richmond Estates','Richmond Heights','Rio Grande Park','Rock Lake','Roosevelt Park','Rose Isle','Rosemont','Rosemont North','Rowena Gardens','Seaboard Industrial','Signal Hill','South Division','Southeastern Oaks','South Eola','South Orange','South Semoran','Southern Oaks','Southport','Spring Lake','Storey Park','The Dovers','The Willows','Thornton Park','Timberleaf','Ventura','Vista East','Vista Park','Wadeview Park','Washington Shores','Wedgewood Groves','West Colonial','Westfield','Windhover' ];
     filteredOptions!: Observable<string[]>;
-    displayedColumns: string[] = ['name', 'address', 'rent', 'rating'];
+    displayedColumns: string[] = ['name', 'neighborhood', 'address', 'rent', 'rating'];
     dataSource = productsDB;
   
 
     //variable for products db
     products: any[] = [];
 
-    
+
     markers: any[] = [];
     isLoaded: boolean = false;
 
@@ -66,7 +65,7 @@ export class SearchListComponent implements OnInit {
     dataSource2 = new MatTableDataSource(productsDB.Product)
 
     filteredValues = {
-      name: '', address: '',
+      name: '', neighborhood: '', address: '',
       rent: '', rating: ''
     };
 
@@ -96,9 +95,9 @@ export class SearchListComponent implements OnInit {
       this.filterValues['address'] = value
       this.dataSource2.filter = JSON.stringify(this.filterValues)
     });
-  this.dataSource2.filterPredicate = this.createFilter();    
+    this.dataSource2.filterPredicate = this.createFilter();    
 
-  //this assigns values to variables
+    //this assigns values to variables
     setTimeout(() => {
       this.products = productsDB.Product;
       this.markers = markersDB.Markers;
@@ -135,14 +134,21 @@ export class SearchListComponent implements OnInit {
   createFilter() {
     let filterFunction = function (data: any, filter: string): boolean {
       let searchTerms = JSON.parse(filter)
-      let nameSearch = () => {
+      let neighborhoodSearch = () => { //searches 'neighborhood' column for match
+        let found = false;
+        searchTerms.address.trim().toLowerCase().split(' ').forEach((word: any) => {
+          if (data.neighborhood.toLowerCase().indexOf(word) != -1) { found = true }
+        });
+        return found
+      }
+      let nameSearch = () => { //searches 'address' column for match
         let found = false;
         searchTerms.address.trim().toLowerCase().split(' ').forEach((word: any) => {
           if (data.address.toLowerCase().indexOf(word) != -1) { found = true }
         });
         return found
       }
-      return nameSearch()
+      return neighborhoodSearch() || nameSearch()
     }
     return filterFunction
   }
