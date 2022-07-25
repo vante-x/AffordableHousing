@@ -16,6 +16,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { EsriMapComponent } from "./search-list/esri-map/esri-map.component";
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [SearchListComponent, SearchDetailsComponent, SearchHeroComponent, EsriMapComponent],
@@ -24,7 +26,7 @@ import { EsriMapComponent } from "./search-list/esri-map/esri-map.component";
     SearchRoutingModule,
     SharedModule,
     MatExpansionModule,
-    
+    MatTabsModule,
     GoogleMapsModule,
     MatCheckboxModule,
     MatSelectModule,
@@ -34,7 +36,8 @@ import { EsriMapComponent } from "./search-list/esri-map/esri-map.component";
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatChipsModule
 
   ],
   exports: [EsriMapComponent]
